@@ -1,0 +1,46 @@
+import random
+
+class Pytanie:
+    def __init__(self, pytanie, opcje, poprawna_opcja):
+        self.pytanie = pytanie
+        self.opcje = opcje
+        self.poprawna_opcja = poprawna_opcja
+
+def generuj_pytania():
+    pytania = []
+    pytania.append(Pytanie("Jaka jest stolica Polski?", ["A. Warszawa", "B. Kraków", "C. Wrocław", "D. Gdańsk"], "A"))
+    pytania.append(Pytanie("Która planeta jest znana jako Czerwona Planeta?", ["A. Ziemia", "B. Mars", "C. Jowisz", "D. Wenus"], "B"))
+    pytania.append(Pytanie("Kto jest autorem 'Romea i Julii'?", ["A. William Shakespeare", "B. Charles Dickens", "C. Jane Austen", "D. Mark Twain"], "A"))
+    # Dodaj więcej pytań, jeśli chcesz
+    return pytania
+
+def zadaj_pytanie(pytanie):
+    print(pytanie.pytanie)
+    for opcja in pytanie.opcje:
+        print(opcja)
+    odpowiedz_uzytkownika = input("Twoja odpowiedź (A/B/C/D): ").upper()
+    return odpowiedz_uzytkownika == pytanie.poprawna_opcja
+
+def zagraj_w_milionerow():
+    print("Witaj w programie Milionerzy!")
+    
+    pytania = generuj_pytania()
+    random.shuffle(pytania)
+    
+    liczba_pytan = len(pytania)
+    poprawne_odpowiedzi = 0
+    
+    for i, pytanie in enumerate(pytania, start=1):
+        print(f"\nPytanie {i}/{liczba_pytan}")
+        if zadaj_pytanie(pytanie):
+            print("Poprawna odpowiedź!")
+            poprawne_odpowiedzi += 1
+        else:
+            print("Błędna odpowiedź! Koniec gry.")
+            break
+
+    print(f"\nKoniec gry. Udzieliłeś poprawnej odpowiedzi na {poprawne_odpowiedzi}/{liczba_pytan} pytań.")
+
+if __name__ == "__main__":
+    zagraj_w_milionerow()
+
